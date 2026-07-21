@@ -1,0 +1,26 @@
+commodity_id,commodity_name,category,standard_unit,is_staple
+1,Rice (imported),Cereals,KG,true
+2,Rice (local),Cereals,KG,true
+3,Maize (white),Cereals,KG,true
+4,Maize (yellow),Cereals,KG,true
+5,Millet,Cereals,KG,true
+6,Sorghum,Cereals,KG,true
+7,Beans (white),Legumes,KG,true
+8,Beans (brown),Legumes,KG,true
+9,Garri (white),Tubers/Processed,KG,true
+10,Garri (yellow),Tubers/Processed,KG,true
+11,Yam tuber,Tubers/Processed,KG,true
+12,Cassava flour,Tubers/Processed,KG,true
+13,Palm oil,Oils,Litre,true
+14,Groundnut oil,Oils,Litre,true
+15,Vegetable oil,Oils,Litre,true
+16,Tomato,Vegetables,KG,false
+17,Onion,Vegetables,KG,false
+18,Pepper (fresh),Vegetables,KG,false
+19,Beef (boneless),Meat,KG,false
+20,Chicken,Meat,KG,false
+21,Fish (catfish),Fish,KG,false
+22,Fish (dried),Fish,KG,false
+23,Eggs,Poultry Products,Piece,false
+24,Bread (sliced),Cereals/Processed,Loaf,false
+25,Sugar,Sweeteners,KG,false
