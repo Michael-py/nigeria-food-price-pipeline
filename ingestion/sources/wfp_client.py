@@ -266,7 +266,7 @@ class WFPClient:
 
         # Step 2: Query market prices for Nigeria
         headers = {"Authorization": f"Bearer {token}"}
-        params = {
+        params: dict[str, object] = {
             "CountryCode": NIGERIA_ISO3,
             "format": "json",
         }
@@ -329,7 +329,7 @@ class WFPClient:
             timeout=30,
         )
         response.raise_for_status()
-        token = response.json()["access_token"]
+        token: str = response.json()["access_token"]
         logger.info("Successfully obtained WFP API access token")
         return token
 

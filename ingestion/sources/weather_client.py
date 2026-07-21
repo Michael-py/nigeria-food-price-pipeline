@@ -6,6 +6,8 @@ Weather features (rainfall, temperature) are used as predictors for food prices.
 Data source: https://open-meteo.com/
 """
 
+from __future__ import annotations
+
 import logging
 from datetime import date
 from typing import Optional
@@ -43,7 +45,7 @@ class WeatherClient:
         self,
         start_date: date,
         end_date: date,
-        markets: Optional[dict] = None,
+        markets: Optional[dict[str, tuple[float, float]]] = None,
     ) -> pd.DataFrame:
         """Fetch weather data for Nigerian market locations.
 

@@ -6,6 +6,8 @@ Provides REST endpoints for:
 - Health checks
 """
 
+from __future__ import annotations
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -39,7 +41,7 @@ async def health_check() -> HealthResponse:
 
 
 @app.get("/commodities")
-async def list_commodities() -> dict:
+async def list_commodities() -> dict[str, list[str]]:
     """List available commodities for forecasting."""
     # TODO: Query database for available commodities
     return {
@@ -59,7 +61,7 @@ async def list_commodities() -> dict:
 
 
 @app.get("/markets")
-async def list_markets() -> dict:
+async def list_markets() -> dict[str, list[str]]:
     """List available markets for forecasting."""
     # TODO: Query database for available markets
     return {
