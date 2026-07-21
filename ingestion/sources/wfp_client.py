@@ -266,7 +266,7 @@ class WFPClient:
 
         # Step 2: Query market prices for Nigeria
         headers = {"Authorization": f"Bearer {token}"}
-        params: dict[str, object] = {
+        params: dict[str, str | int] = {
             "CountryCode": NIGERIA_ISO3,
             "format": "json",
         }
