@@ -16,12 +16,15 @@ from ingestion.utils.config import get_database_url
 
 logger = logging.getLogger(__name__)
 
+# Project root directory
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
 
 class NBSExtractor:
     """Extracts food prices from NBS PDF reports."""
 
     def __init__(self) -> None:
-        self.download_dir = Path("data/downloads/nbs")
+        self.download_dir = PROJECT_ROOT / "data" / "downloads" / "nbs"
         self.download_dir.mkdir(parents=True, exist_ok=True)
 
     def download_report(self, year: int, month: int) -> Path:

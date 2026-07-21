@@ -23,10 +23,8 @@ ENV/
 .env
 
 # Data (raw data files - too large for git)
-data/raw/*.csv
-data/raw/*.json
-data/raw/*.pdf
-data/downloads/
+data/*
+!data/.gitkeep
 
 # Database
 *.db

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import logging
 from datetime import date
+from pathlib import Path
 from typing import Optional
 
 import pandas as pd
@@ -35,11 +36,17 @@ NIGERIAN_MARKETS = {
 }
 
 
+# Project root directory
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
+
 class WeatherClient:
     """Client for fetching weather data from Open-Meteo API."""
 
     def __init__(self) -> None:
         self.base_url = get_env_var("OPEN_METEO_BASE_URL", "https://api.open-meteo.com/v1")
+        self.data_dir = PROJECT_ROOT / "data" / "downloads" / "weather"
+        self.data_dir.mkdir(parents=True, exist_ok=True)
 
     def fetch_weather(
         self,

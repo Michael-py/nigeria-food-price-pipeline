@@ -48,6 +48,10 @@ NIGERIA_ISO3 = "NGA"
 NIGERIA_ADM0_CODE = 182  # WFP internal country code for Nigeria
 
 
+# Project root directory
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
+
 class WFPClient:
     """Client for fetching food prices from WFP (HDX or DataBridges API).
 
@@ -60,7 +64,7 @@ class WFPClient:
     def __init__(self) -> None:
         self.api_key = get_env_var("WFP_API_KEY", "")
         self.api_secret = get_env_var("WFP_API_SECRET", "")
-        self.data_dir = Path("data/downloads/wfp")
+        self.data_dir = PROJECT_ROOT / "data" / "downloads" / "wfp"
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": "NigeriaFoodPricePipeline/0.1"})
