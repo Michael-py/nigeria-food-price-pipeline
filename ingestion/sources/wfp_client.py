@@ -37,9 +37,7 @@ HDX_NIGERIA_CSV_URL = (
 )
 
 # Fallback: HDX dataset page to scrape the latest resource URL
-HDX_NIGERIA_DATASET_URL = (
-    "https://data.humdata.org/dataset/wfp-food-prices-for-nigeria"
-)
+HDX_NIGERIA_DATASET_URL = "https://data.humdata.org/dataset/wfp-food-prices-for-nigeria"
 
 # WFP DataBridges API endpoints
 DATABRIDGES_TOKEN_URL = "https://api.wfp.org/token"
@@ -120,7 +118,7 @@ class WFPClient:
         Returns:
             Standardized DataFrame of food prices.
         """
-        logger.info(f"Downloading WFP Nigeria food prices from HDX...")
+        logger.info("Downloading WFP Nigeria food prices from HDX...")
 
         # Try the direct resource URL first
         try:
@@ -163,8 +161,7 @@ class WFPClient:
         for the Nigeria food prices dataset.
         """
         ckan_url = (
-            "https://data.humdata.org/api/3/action/package_show"
-            "?id=wfp-food-prices-for-nigeria"
+            "https://data.humdata.org/api/3/action/package_show?id=wfp-food-prices-for-nigeria"
         )
         meta_response = self.session.get(ckan_url, timeout=30)
         meta_response.raise_for_status()
@@ -278,7 +275,7 @@ class WFPClient:
         if end_date:
             params["endDate"] = end_date.isoformat()
 
-        logger.info(f"Querying DataBridges API for Nigeria prices...")
+        logger.info("Querying DataBridges API for Nigeria prices...")
 
         all_items = []
         page = 1
@@ -360,8 +357,13 @@ class WFPClient:
 
         # Keep standard columns
         keep_cols = [
-            "price_date", "market_name", "commodity_name",
-            "currency_name", "unit_name", "price", "source",
+            "price_date",
+            "market_name",
+            "commodity_name",
+            "currency_name",
+            "unit_name",
+            "price",
+            "source",
         ]
         df = df[[c for c in keep_cols if c in df.columns]].copy()
 
@@ -383,12 +385,13 @@ class WFPClient:
         engine = create_engine(get_database_url())
 
         # Map our standard columns to the database table columns
-        db_df = df[["market_name", "commodity_name", "currency_name",
-                    "unit_name", "price", "price_date"]].copy()
+        db_df = df[
+            ["market_name", "commodity_name", "currency_name", "unit_name", "price", "price_date"]
+        ].copy()
         db_df["country_name"] = "Nigeria"
         db_df["source"] = df.get("source", "WFP")
 
-        rows = db_df.to_sql(
+        db_df.to_sql(
             name="wfp_prices",
             schema="raw",
             con=engine,

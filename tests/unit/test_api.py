@@ -1,6 +1,5 @@
 """Unit tests for the FastAPI prediction service."""
 
-import pytest
 from fastapi.testclient import TestClient
 
 from ml.serving.app import app

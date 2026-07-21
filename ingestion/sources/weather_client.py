@@ -8,9 +8,10 @@ Data source: https://open-meteo.com/
 
 import logging
 from datetime import date
+from typing import Optional
 
 import pandas as pd
-import requests
+import requests  # noqa: F401 — used when fetch_weather is implemented
 from sqlalchemy import create_engine
 
 from ingestion.utils.config import get_database_url, get_env_var
@@ -36,15 +37,13 @@ class WeatherClient:
     """Client for fetching weather data from Open-Meteo API."""
 
     def __init__(self) -> None:
-        self.base_url = get_env_var(
-            "OPEN_METEO_BASE_URL", "https://api.open-meteo.com/v1"
-        )
+        self.base_url = get_env_var("OPEN_METEO_BASE_URL", "https://api.open-meteo.com/v1")
 
     def fetch_weather(
         self,
         start_date: date,
         end_date: date,
-        markets: "dict[str, tuple[float, float]] | None" = None,
+        markets: Optional[dict] = None,
     ) -> pd.DataFrame:
         """Fetch weather data for Nigerian market locations.
 

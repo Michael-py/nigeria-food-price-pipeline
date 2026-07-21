@@ -13,7 +13,7 @@ st.title("🇳🇬 Nigeria Food Price Intelligence")
 st.markdown(
     """
     Real-time food price monitoring and forecasting across Nigerian commodity markets.
-    
+
     **Select a page from the sidebar to explore:**
     - 📈 **Price Trends** — Historical price movements by commodity and market
     - 🔮 **Forecasts** — 7-day and 30-day price predictions
