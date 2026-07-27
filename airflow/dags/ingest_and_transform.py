@@ -10,9 +10,9 @@ rebuilds the analytical layer, and retrains forecasting models.
 
 from datetime import datetime, timedelta
 
-from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
+
+from airflow import DAG
 
 # Project directory inside the Airflow container
 PROJECT_DIR = "/opt/airflow"
@@ -50,7 +50,6 @@ with DAG(
     6. **Train** — Retrain XGBoost models and register in MLflow
     """,
 ) as dag:
-
     # =========================================
     # STEP 1: DATA INGESTION (parallel)
     # =========================================

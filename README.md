@@ -186,7 +186,7 @@ nigeria-food-price-pipeline/
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/nigeria-food-price-pipeline.git
+git clone https://github.com/Michael-py/nigeria-food-price-pipeline.git
 cd nigeria-food-price-pipeline
 
 # Copy environment variables

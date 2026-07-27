@@ -60,7 +60,13 @@ st.sidebar.markdown("---")
 
 page = st.sidebar.radio(
     "Navigate",
-    ["📈 Price Trends", "🗺️ Market Comparison", "📊 State Averages", "🔮 Forecasts", "✅ Data Quality"],
+    [
+        "📈 Price Trends",
+        "🗺️ Market Comparison",
+        "📊 State Averages",
+        "🔮 Forecasts",
+        "✅ Data Quality",
+    ],
 )
 
 # Load shared data
@@ -111,7 +117,9 @@ if page == "📈 Price Trends":
     unit = unit_row.iloc[0] if not unit_row.empty else "KG"
 
     # Filter
-    mask = (daily["commodity_name"] == selected_commodity) & (daily["market_name"].isin(selected_markets))
+    mask = (daily["commodity_name"] == selected_commodity) & (
+        daily["market_name"].isin(selected_markets)
+    )
     filtered = daily[mask]
 
     if filtered.empty:
@@ -122,7 +130,11 @@ if page == "📈 Price Trends":
             markets_dim[["market_name", "state"]], on="market_name", how="left"
         )
         filtered_display["label"] = filtered_display.apply(
-            lambda r: f"{r['market_name']} ({r['state']})" if pd.notna(r.get("state")) else r["market_name"],
+            lambda r: (
+                f"{r['market_name']} ({r['state']})"
+                if pd.notna(r.get("state"))
+                else r["market_name"]
+            ),
             axis=1,
         )
 
@@ -132,7 +144,11 @@ if page == "📈 Price Trends":
             y="price_ngn",
             color="label",
             title=f"{selected_commodity} — Price Over Time (NGN per {unit})",
-            labels={"price_ngn": f"Price (₦/{unit})", "price_date": "Date", "label": "Market (State)"},
+            labels={
+                "price_ngn": f"Price (₦/{unit})",
+                "price_date": "Date",
+                "label": "Market (State)",
+            },
         )
         fig.update_layout(height=500, hovermode="x unified")
         st.plotly_chart(fig, use_container_width=True)
@@ -154,9 +170,13 @@ elif page == "🗺️ Market Comparison":
     latest = commodity_data[commodity_data["price_date"] == latest_date].copy()
 
     # Enrich with state
-    latest = latest.merge(markets_dim[["market_name", "state", "geopolitical_zone"]], on="market_name", how="left")
+    latest = latest.merge(
+        markets_dim[["market_name", "state", "geopolitical_zone"]], on="market_name", how="left"
+    )
     latest["display"] = latest.apply(
-        lambda r: f"{r['market_name']} ({r['state']})" if pd.notna(r.get("state")) else r["market_name"],
+        lambda r: (
+            f"{r['market_name']} ({r['state']})" if pd.notna(r.get("state")) else r["market_name"]
+        ),
         axis=1,
     )
 
@@ -170,7 +190,11 @@ elif page == "🗺️ Market Comparison":
             orientation="h",
             color="geopolitical_zone",
             title=f"{selected_commodity} — Price per {unit} by Market ({latest_date.date()})",
-            labels={"price_ngn": f"Price (₦/{unit})", "display": "Market (State)", "geopolitical_zone": "Zone"},
+            labels={
+                "price_ngn": f"Price (₦/{unit})",
+                "display": "Market (State)",
+                "geopolitical_zone": "Zone",
+            },
         )
         fig.update_layout(height=max(400, len(latest) * 25))
         st.plotly_chart(fig, use_container_width=True)
@@ -178,7 +202,9 @@ elif page == "🗺️ Market Comparison":
         col1, col2, col3 = st.columns(3)
         col1.metric("Markets", len(latest))
         col2.metric("Average", f"₦{latest['price_ngn'].mean():,.0f}/{unit}")
-        col3.metric("Range", f"₦{latest['price_ngn'].min():,.0f} — ₦{latest['price_ngn'].max():,.0f}")
+        col3.metric(
+            "Range", f"₦{latest['price_ngn'].min():,.0f} — ₦{latest['price_ngn'].max():,.0f}"
+        )
 
 
 elif page == "📊 State Averages":
@@ -196,7 +222,9 @@ elif page == "📊 State Averages":
     commodity_data = daily_enriched[daily_enriched["commodity_name"] == selected_commodity].copy()
 
     if commodity_data.empty or commodity_data["state"].isna().all():
-        st.warning("No state-level data available for this commodity. State mapping only covers markets in our seed data.")
+        st.warning(
+            "No state-level data available for this commodity. State mapping only covers markets in our seed data."
+        )
     else:
         # State averages (latest 3 months)
         recent_cutoff = commodity_data["price_date"].max() - pd.DateOffset(months=3)
@@ -221,7 +249,11 @@ elif page == "📊 State Averages":
                 orientation="h",
                 color="geopolitical_zone",
                 title=f"{selected_commodity} — Average Price per {unit} by State (Last 3 months)",
-                labels={"avg_price": f"Avg Price (₦/{unit})", "state": "State", "geopolitical_zone": "Zone"},
+                labels={
+                    "avg_price": f"Avg Price (₦/{unit})",
+                    "state": "State",
+                    "geopolitical_zone": "Zone",
+                },
             )
             fig.update_layout(height=max(400, len(state_avg) * 30))
             st.plotly_chart(fig, use_container_width=True)
@@ -236,12 +268,14 @@ elif page == "📊 State Averages":
             display_df = state_avg.copy()
             display_df["avg_price"] = display_df["avg_price"].apply(lambda x: f"₦{x:,.0f}")
             st.dataframe(
-                display_df.rename(columns={
-                    "state": "State",
-                    "geopolitical_zone": "Zone",
-                    "avg_price": f"Avg Price (/{unit})",
-                    "observations": "Data Points",
-                }),
+                display_df.rename(
+                    columns={
+                        "state": "State",
+                        "geopolitical_zone": "Zone",
+                        "avg_price": f"Avg Price (/{unit})",
+                        "observations": "Data Points",
+                    }
+                ),
                 use_container_width=True,
                 hide_index=True,
             )
@@ -268,35 +302,45 @@ elif page == "🔮 Forecasts":
 
         if not market_counts.empty:
             best_market = market_counts.index[0]
-            market_data = commodity_features[commodity_features["market_name"] == best_market].copy()
+            market_data = commodity_features[
+                commodity_features["market_name"] == best_market
+            ].copy()
             recent = market_data.tail(180)
 
             if not recent.empty:
                 state_info = markets_dim[markets_dim["market_name"] == best_market]["state"].values
-                state_label = f", {state_info[0]}" if len(state_info) > 0 and pd.notna(state_info[0]) else ""
-                st.markdown(f"**Showing:** {best_market}{state_label} (market with most data for this commodity)")
+                state_label = (
+                    f", {state_info[0]}" if len(state_info) > 0 and pd.notna(state_info[0]) else ""
+                )
+                st.markdown(
+                    f"**Showing:** {best_market}{state_label} (market with most data for this commodity)"
+                )
 
                 fig = go.Figure()
 
                 # Actual
-                fig.add_trace(go.Scatter(
-                    x=recent["price_date"],
-                    y=recent["price_ngn"],
-                    mode="lines",
-                    name="Actual Price",
-                    line=dict(color="steelblue", width=2),
-                ))
+                fig.add_trace(
+                    go.Scatter(
+                        x=recent["price_date"],
+                        y=recent["price_ngn"],
+                        mode="lines",
+                        name="Actual Price",
+                        line=dict(color="steelblue", width=2),
+                    )
+                )
 
                 # 30-day trend
                 if "roll_mean_30d" in recent.columns:
                     valid = recent.dropna(subset=["roll_mean_30d"])
-                    fig.add_trace(go.Scatter(
-                        x=valid["price_date"],
-                        y=valid["roll_mean_30d"],
-                        mode="lines",
-                        name="30-Day Trend",
-                        line=dict(color="orange", width=2, dash="dash"),
-                    ))
+                    fig.add_trace(
+                        go.Scatter(
+                            x=valid["price_date"],
+                            y=valid["roll_mean_30d"],
+                            mode="lines",
+                            name="30-Day Trend",
+                            line=dict(color="orange", width=2, dash="dash"),
+                        )
+                    )
 
                 # Future projection (simple: extend the 30d trend)
                 if "roll_mean_30d" in recent.columns and "mom_pct_change_30d" in recent.columns:
@@ -311,30 +355,38 @@ elif page == "🔮 Forecasts":
                         daily_change = last_momentum / 30
                         future_prices = [last_price * (1 + daily_change * i) for i in range(1, 31)]
 
-                        fig.add_trace(go.Scatter(
-                            x=future_dates,
-                            y=future_prices,
-                            mode="lines",
-                            name="30-Day Projection",
-                            line=dict(color="green", width=2, dash="dot"),
-                        ))
+                        fig.add_trace(
+                            go.Scatter(
+                                x=future_dates,
+                                y=future_prices,
+                                mode="lines",
+                                name="30-Day Projection",
+                                line=dict(color="green", width=2, dash="dot"),
+                            )
+                        )
 
                         # Confidence band
-                        std = recent["roll_std_30d"].iloc[-1] if "roll_std_30d" in recent.columns else last_price * 0.1
+                        std = (
+                            recent["roll_std_30d"].iloc[-1]
+                            if "roll_std_30d" in recent.columns
+                            else last_price * 0.1
+                        )
                         if pd.isna(std):
                             std = last_price * 0.1
                         upper = [p + 1.96 * std for p in future_prices]
                         lower = [max(0, p - 1.96 * std) for p in future_prices]
 
-                        fig.add_trace(go.Scatter(
-                            x=list(future_dates) + list(future_dates)[::-1],
-                            y=upper + lower[::-1],
-                            fill="toself",
-                            fillcolor="rgba(0,200,0,0.1)",
-                            line=dict(color="rgba(0,0,0,0)"),
-                            name="95% Confidence",
-                            showlegend=True,
-                        ))
+                        fig.add_trace(
+                            go.Scatter(
+                                x=list(future_dates) + list(future_dates)[::-1],
+                                y=upper + lower[::-1],
+                                fill="toself",
+                                fillcolor="rgba(0,200,0,0.1)",
+                                line=dict(color="rgba(0,0,0,0)"),
+                                name="95% Confidence",
+                                showlegend=True,
+                            )
+                        )
 
                 fig.update_layout(
                     title=f"{selected} — Price History & 30-Day Forecast",
@@ -364,7 +416,9 @@ elif page == "🔮 Forecasts":
                     col1, col2, col3, col4 = st.columns(4)
                     col1.metric("Current Price", f"₦{current:,.0f}")
                     col2.metric("30-Day Change", f"{change:+.1f}%")
-                    col3.metric("Trend", "Rising" if change > 2 else "Falling" if change < -2 else "Stable")
+                    col3.metric(
+                        "Trend", "Rising" if change > 2 else "Falling" if change < -2 else "Stable"
+                    )
                     if pd.notna(last_momentum):
                         projected_30d = last_price * (1 + last_momentum)
                         col4.metric("30-Day Forecast", f"₦{projected_30d:,.0f}")
@@ -384,12 +438,14 @@ elif page == "🔮 Forecasts":
             )
             st.dataframe(
                 df_30d[["commodity", "naive_mape", "xgb_mape", "mape_improvement_pct", "Winner"]]
-                .rename(columns={
-                    "commodity": "Commodity",
-                    "naive_mape": "Simple Method Error (%)",
-                    "xgb_mape": "ML Model Error (%)",
-                    "mape_improvement_pct": "ML Improvement (%)",
-                })
+                .rename(
+                    columns={
+                        "commodity": "Commodity",
+                        "naive_mape": "Simple Method Error (%)",
+                        "xgb_mape": "ML Model Error (%)",
+                        "mape_improvement_pct": "ML Improvement (%)",
+                    }
+                )
                 .sort_values("ML Improvement (%)", ascending=False),
                 use_container_width=True,
                 hide_index=True,
@@ -433,4 +489,6 @@ elif page == "✅ Data Quality":
     """),
         engine,
     )
-    st.dataframe(freshness.rename(columns={"source": "Source", "latest": "Latest Data"}), hide_index=True)
+    st.dataframe(
+        freshness.rename(columns={"source": "Source", "latest": "Latest Data"}), hide_index=True
+    )
