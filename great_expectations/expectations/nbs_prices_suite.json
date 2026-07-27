@@ -1,0 +1,34 @@
+{
+  "expectation_suite_name": "nbs_prices_suite",
+  "meta": {
+    "great_expectations_version": "0.18.0"
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {"min_value": 10, "max_value": 10000},
+      "meta": {"notes": "NBS data is relatively small (extracted from PDFs)"}
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {"column": "commodity_name"}
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {"column": "price"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "commodity_name"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "price"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "price", "min_value": 50, "max_value": 50000},
+      "meta": {"notes": "NBS prices in NGN, per kg/unit — minimum N50"}
+    }
+  ]
+}

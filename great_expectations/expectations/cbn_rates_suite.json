@@ -1,0 +1,32 @@
+{
+  "expectation_suite_name": "cbn_rates_suite",
+  "meta": {
+    "great_expectations_version": "1.8.1"
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {"min_value": 1, "max_value": 100000}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "rate_date"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "central_rate"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "central_rate", "min_value": 100, "max_value": 5000}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "buying_rate", "min_value": 100, "max_value": 5000}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "selling_rate", "min_value": 100, "max_value": 5000}
+    }
+  ]
+}

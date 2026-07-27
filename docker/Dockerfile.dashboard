@@ -1,16 +1,20 @@
-FROM python:3.10-slim
+FROM python:3.9-slim-bookworm
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install dependencies
 COPY pyproject.toml .
-RUN pip install --no-cache-dir -e ".[dashboard]"
+RUN pip install --no-cache-dir \
+    streamlit plotly psycopg2-binary sqlalchemy pandas numpy python-dotenv
 
+# Copy source code
 COPY dashboard/ dashboard/
+COPY data/features/ data/features/
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]

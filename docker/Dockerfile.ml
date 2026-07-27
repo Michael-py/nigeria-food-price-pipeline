@@ -1,13 +1,12 @@
-FROM python:3.10-slim
+FROM python:3.9-slim-bookworm
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY pyproject.toml .
-RUN pip install --no-cache-dir -e ".[ml]" mlflow
+RUN pip install --no-cache-dir mlflow psycopg2-binary
 
 EXPOSE 5000
 

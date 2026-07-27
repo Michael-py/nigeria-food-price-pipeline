@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+.venv
+venv
+*.egg-info
+
+# IDE
+.vscode
+.idea
+
+# Data (large files, mount as volumes instead)
+data/downloads/
+data/features/ml_features.csv
+
+# Docker
+docker-compose.yml
+.dockerignore
+
+# Docs
+docs/
+Seminar_Guidelines/
+seminar_topics.md
+*.md
+!README.md
+
+# Tests
+tests/
+.pytest_cache
+.coverage
+htmlcov
+
+# Misc
+.env
+.mypy_cache
+.ruff_cache

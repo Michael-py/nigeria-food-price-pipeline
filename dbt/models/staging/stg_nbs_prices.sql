@@ -1,35 +1,31 @@
--- Staging model for WFP food price data
--- Cleans, deduplicates, and standardizes
+-- Staging model for NBS Selected Food Prices Watch
+-- Standardizes zonal/national price data
 
 with source as (
-    select * from {{ source('raw', 'wfp_prices') }}
+    select * from {{ source('raw', 'nbs_prices') }}
 ),
 
 cleaned as (
     select
-        market_name,
         commodity_name,
-        currency_name,
-        unit_name,
+        unit as unit_name,
         price as price_ngn,
-        price_date,
+        report_month as price_date,
+        state as market_name,
         source,
         ingested_at,
         row_number() over (
-            partition by market_name, commodity_name, price_date
+            partition by commodity_name, state, report_month
             order by ingested_at desc
         ) as row_num
     from source
     where price > 0
-      and price_date is not null
-      and market_name is not null
       and commodity_name is not null
 )
 
 select
     market_name,
     commodity_name,
-    currency_name,
     unit_name,
     price_ngn,
     price_date,

@@ -43,9 +43,17 @@ services:
       - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY:-changeme-secret-key}
       - AIRFLOW_ADMIN_USER=${AIRFLOW_ADMIN_USER:-admin}
       - AIRFLOW_ADMIN_PASSWORD=${AIRFLOW_ADMIN_PASSWORD:-admin}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=${POSTGRES_DB:-food_prices}
+      - POSTGRES_USER=${POSTGRES_USER:-pipeline}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
     volumes:
       - ./airflow/dags:/opt/airflow/dags
-      - ./airflow/plugins:/opt/airflow/plugins
+      - ./ingestion:/opt/airflow/ingestion
+      - ./ml:/opt/airflow/ml
+      - ./dbt:/opt/airflow/dbt
+      - ./data:/opt/airflow/data
       - airflow_logs:/opt/airflow/logs
     depends_on:
       postgres:
@@ -60,9 +68,17 @@ services:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER:-pipeline}:${POSTGRES_PASSWORD:-changeme}@postgres:5432/airflow
       - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY:-changeme-secret-key}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=${POSTGRES_DB:-food_prices}
+      - POSTGRES_USER=${POSTGRES_USER:-pipeline}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
     volumes:
       - ./airflow/dags:/opt/airflow/dags
-      - ./airflow/plugins:/opt/airflow/plugins
+      - ./ingestion:/opt/airflow/ingestion
+      - ./ml:/opt/airflow/ml
+      - ./dbt:/opt/airflow/dbt
+      - ./data:/opt/airflow/data
       - airflow_logs:/opt/airflow/logs
     depends_on:
       postgres:

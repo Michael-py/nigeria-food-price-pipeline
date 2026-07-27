@@ -242,3 +242,14 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 ## Academic Context
 
 This project is developed as part of the **MIT 8212 – Seminar: Industry Applications and Management in Information Technology** at Miva Open University. It demonstrates the application of data engineering and machine learning engineering to solve a real problem in the Nigerian economy.
+
+**Title:** Design and Implementation of an End-to-End Data Pipeline for Real-Time Food Price Monitoring and Forecasting in Nigerian Markets
+
+**Key Results:**
+- 140,000+ rows ingested from 3 public data sources (fully automated)
+- 22 data quality checks passing across 5 raw tables
+- Star schema with 105,950 daily price observations across 74 markets
+- XGBoost achieves 36% MAPE improvement over naive baseline for 30-day Oil Palm forecasts
+- REST API serving predictions in <500ms
+- Interactive 4-page Streamlit dashboard
+- Full Docker Compose one-command deployment

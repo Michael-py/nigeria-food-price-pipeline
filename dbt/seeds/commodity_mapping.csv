@@ -1,0 +1,121 @@
+raw_name,clean_name,category,unit
+Millet,Millet,Cereals,KG
+Yam,Yam tuber,Tubers,KG
+Yam Tuber,Yam tuber,Tubers,KG
+Yam tuber,Yam tuber,Tubers,KG
+Groundnuts,Groundnuts,Legumes,KG
+Onions,Onions,Vegetables,KG
+"Onions, fresh",Onions,Vegetables,KG
+Onion buld,Onions,Vegetables,KG
+Eggs,Eggs (crate of 30),Poultry Products,Crate
+Agric hen eggs,Eggs (crate of 30),Poultry Products,Crate
+"Agric hen eggs, (a Crate of 30 pieces)",Eggs (crate of 30),Poultry Products,Crate
+Maize flour,Maize flour,Cereals,KG
+Rice (imported),Rice (imported),Cereals,KG
+"Rice, imported high quality sold",Rice (imported),Cereals,KG
+Rice (local),Rice (local),Cereals,KG
+Rice local,Rice (local),Cereals,KG
+Oil (palm),Palm oil,Oils,Litre
+Sorghum,Sorghum,Cereals,KG
+Rice,Rice (mixed),Cereals,KG
+Rice (various),Rice (mixed),Cereals,KG
+Oil (vegetable),Vegetable oil,Oils,Litre
+Cooking oil,Vegetable oil,Oils,Litre
+Beans (red),Beans (brown),Legumes,KG
+Beans Brown,Beans (brown),Legumes,KG
+Beans brown,Beans (brown),Legumes,KG
+Beans (white),Beans (white),Legumes,KG
+Beans White,Beans (white),Legumes,KG
+Beans white,Beans (white),Legumes,KG
+Beans,Beans (mixed),Legumes,KG
+Fish,Fish (mixed),Fish,KG
+Milk (powder),Milk (powder),Dairy,KG
+Milk,Milk,Dairy,Litre
+Meat (beef),Beef (boneless),Meat,KG
+Beef,Beef (boneless),Meat,KG
+Beef Boneless,Beef (boneless),Meat,KG
+"Beef,boneless",Beef (boneless),Meat,KG
+Meat (goat),Goat meat,Meat,KG
+Oranges,Oranges,Fruits,KG
+Watermelons,Watermelon,Fruits,Piece
+"Watermelon whole, medium size",Watermelon,Fruits,Piece
+"Watermelon whole, medium size fresh",Watermelon,Fruits,Piece
+Bananas,Bananas,Fruits,KG
+Sugar,Sugar,Sweeteners,KG
+Salt,Salt,Condiments,KG
+Tomatoes,Tomatoes,Vegetables,KG
+Tomato,Tomatoes,Vegetables,KG
+"Tomatoes, fresh",Tomatoes,Vegetables,KG
+Spinach,Spinach,Vegetables,KG
+Garri,Garri (white),Tubers,KG
+Garri white,Garri (white),Tubers,KG
+Garri White,Garri (white),Tubers,KG
+"gari(white)",Garri (white),Tubers,KG
+Garri Yellow,Garri (yellow),Tubers,KG
+Garri yellow,Garri (yellow),Tubers,KG
+Cowpeas,Cowpeas,Legumes,KG
+Maize,Maize (grain),Cereals,KG
+"Maize (Corn) Grains (White) sold loose",Maize (grain white),Cereals,KG
+Maize grain white sold loose,Maize (grain white),Cereals,KG
+Cassava,Cassava,Tubers,KG
+Cassava flour,Cassava flour,Tubers,KG
+Plantains,Plantains,Fruits,KG
+Plantain (ripe),Plantain (ripe),Fruits,KG
+Plantain(ripe),Plantain (ripe),Fruits,KG
+Plantain (unripe),Plantain (unripe),Fruits,KG
+Plantain(unripe),Plantain (unripe),Fruits,KG
+Wheat flour,Wheat flour,Cereals,KG
+"Wheat flour: prepacked (golden",Golden Penny flour (2kg),Cereals,2KG
+Bread,Bread (sliced),Cereals,Loaf
+Bread (sliced),Bread (sliced),Cereals,450g
+Bread (unsliced),Bread (unsliced),Cereals,450g
+Cat fresh fish,Catfish (fresh),Fish,KG
+Catfish Obokun fresh,Catfish (fresh),Fish,KG
+Fish (catfish),Catfish (fresh),Fish,KG
+Chicken feet,Chicken feet,Meat,KG
+Chicken Feet,Chicken feet,Meat,KG
+Chicken meat (Frozen),Chicken (frozen),Meat,KG
+Chicken Wings,Chicken wings,Meat,KG
+Cray fish small white,Crayfish (small white),Fish,KG
+Dried fish Bonga,Dried fish (bonga),Fish,KG
+"Dried fish, Bonga",Dried fish (bonga),Fish,KG
+Irish Potatoe,Irish potato,Tubers,KG
+Irish potato,Irish potato,Tubers,KG
+"Mackerel : frozen",Mackerel (frozen),Fish,KG
+"Mackerel, Frozen",Mackerel (frozen),Fish,KG
+Sweet potato,Sweet potato,Tubers,KG
+Sweet potatoes,Sweet potato,Tubers,KG
+Tilapia fish (epiya) fresh,Tilapia (fresh),Fish,KG
+Tilapia fresh fish (Epiya),Tilapia (fresh),Fish,KG
+"Titus, frozen",Titus (frozen),Fish,KG
+Titus:frozen,Titus (frozen),Fish,KG
+Carrots,Carrots,Vegetables,KG
+"Carrots, fresh",Carrots,Vegetables,KG
+Ginger,Ginger,Vegetables,KG
+"Ginger, fresh",Ginger,Vegetables,KG
+Palm oil,Palm oil,Oils,Litre
+
+"Beans brown,sold loose",Beans (brown),Legumes,KG
+"Beans:white black eye. sold loose",Beans (white),Legumes,KG
+"Gari white,sold loose",Garri (white),Tubers,KG
+"Gari yellow,sold loose",Garri (yellow),Tubers,KG
+"Agric hen eggs,",Eggs (crate of 30),Poultry Products,Crate
+"Agric eggs medium size",Eggs (crate of 30),Poultry Products,Crate
+"Agric eggs(medium size price of",Eggs (crate of 30),Poultry Products,Crate
+Catfish (obokun) fresh,Catfish (fresh),Fish,KG
+"Catfish :dried",Catfish (dried),Fish,KG
+Catfish Smoked,Catfish (smoked),Fish,KG
+Frozen chicken,Chicken (frozen),Meat,KG
+"Mackerel : frozen",Mackerel (frozen),Fish,KG
+"Titus, frozen",Titus (frozen),Fish,KG
+Titus:frozen,Titus (frozen),Fish,KG
+Goat Meat Bone in,Goat meat,Meat,KG
+Beef Bone in,Beef (bone-in),Meat,KG
+Broken Rice (Ofada),Rice (ofada),Cereals,KG
+"Cassava meal (gari, yellow)",Garri (yellow),Tubers,KG
+Gari (white),Garri (white),Tubers,KG
+Dried Fish Sardine,Dried fish (sardine),Fish,KG
+"Groundnut oil, 75cl",Groundnut oil,Oils,75cl
+"Groundnut oil: 1 bottle, specify",Groundnut oil,Oils,Bottle
+"Evaporated tinned milk carnation",Evaporated milk,Dairy,Tin
+"Evaporated tinned milk(peak),",Evaporated milk (Peak),Dairy,Tin

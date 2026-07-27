@@ -29,17 +29,22 @@ from ingestion.utils.config import get_database_url, get_env_var
 
 logger = logging.getLogger(__name__)
 
-# HDX direct download URL for Nigeria food prices (no auth required)
+# HDX direct download URL for Nigeria food prices (actively updated)
 HDX_NIGERIA_CSV_URL = (
     "https://data.humdata.org/dataset/"
-    "wfp-food-prices-for-nigeria/resource/"
-    "download/wfp_food_prices_nga.csv"
+    "42db041f-7aaf-4ab4-961f-2a12096861e7/resource/"
+    "12b51155-0cd3-4806-9924-61ede4077591/download/wfp_food_prices_nga.csv"
 )
 
-# Fallback: HDX dataset page to scrape the latest resource URL
+# HDX dataset page (CKAN API)
 HDX_NIGERIA_DATASET_URL = "https://data.humdata.org/dataset/wfp-food-prices-for-nigeria"
 
-# WFP DataBridges API endpoints
+# World Bank Real-Time Prices — updated weekly with recent Nigeria data
+# Built on WFP + FAO + NBS data, ML-estimated to fill gaps
+WORLDBANK_RTP_BASE_URL = "https://prices.worldbank.org/food-prices/downloads"
+WORLDBANK_RTP_NIGERIA_DATASET_ID = "4503"
+
+# WFP DataBridges API endpoints (requires credentials)
 DATABRIDGES_TOKEN_URL = "https://api.wfp.org/token"
 DATABRIDGES_PRICES_URL = "https://api.wfp.org/vam-food-prices/v1/MarketPrices"
 
@@ -81,13 +86,14 @@ class WFPClient:
     ) -> pd.DataFrame:
         """Fetch food prices for Nigerian markets.
 
-        Automatically chooses the best available data source:
-        - If API credentials are set: uses DataBridges API
-        - Otherwise: downloads from HDX (no auth needed)
+        Data source priority:
+        1. DataBridges API (if credentials are set) — most current
+        2. World Bank RTP via HDX (no auth) — updated weekly, recent data
+        3. HDX legacy dataset (no auth) — historical only, up to ~2023
 
         Args:
-            start_date: Start of date range (inclusive). Only used with API path.
-            end_date: End of date range (inclusive). Only used with API path.
+            start_date: Start of date range (inclusive).
+            end_date: End of date range (inclusive).
 
         Returns:
             DataFrame with standardized columns:
@@ -102,7 +108,7 @@ class WFPClient:
             logger.info("WFP API credentials found — using DataBridges API")
             return self._fetch_from_api(start_date, end_date)
         else:
-            logger.info("No WFP API key — using HDX CSV download (no auth needed)")
+            logger.info("No WFP API key — using HDX download (no auth needed)")
             return self._fetch_from_hdx(start_date, end_date)
 
     def _fetch_from_hdx(
@@ -110,10 +116,10 @@ class WFPClient:
         start_date: Optional[date] = None,
         end_date: Optional[date] = None,
     ) -> pd.DataFrame:
-        """Download and parse Nigeria food prices CSV from HDX.
+        """Download and parse Nigeria food prices from HDX.
 
-        HDX provides a full historical CSV file that is updated regularly.
-        No authentication required.
+        Tries the direct download URL first (faster), falls back to
+        CKAN API lookup if that fails.
 
         Args:
             start_date: Filter results to this start date (post-download filter).
@@ -124,13 +130,12 @@ class WFPClient:
         """
         logger.info("Downloading WFP Nigeria food prices from HDX...")
 
-        # Try the direct resource URL first
+        # Try direct download URL first (faster)
         try:
             response = self.session.get(HDX_NIGERIA_CSV_URL, timeout=120)
             response.raise_for_status()
         except requests.RequestException as e:
-            logger.warning(f"Direct HDX URL failed: {e}. Trying alternative...")
-            # Alternative: try the CKAN API to get the latest resource URL
+            logger.warning(f"Direct HDX URL failed: {e}. Trying CKAN API...")
             response = self._fetch_hdx_via_ckan()
 
         # Parse CSV
@@ -420,5 +425,6 @@ if __name__ == "__main__":
     print(f"Date range: {data['price_date'].min()} to {data['price_date'].max()}")
     print(f"\nSample:\n{data.head()}")
 
-    # Uncomment to load into database:
-    # client.load_to_database(data)
+    # Load into database
+    loaded = client.load_to_database(data)
+    print(f"\nLoaded {loaded} rows into raw.wfp_prices")

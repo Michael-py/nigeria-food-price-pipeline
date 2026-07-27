@@ -1,0 +1,15 @@
+# dbt profile for use inside Docker containers (Airflow)
+# When running locally, use ~/.dbt/profiles.yml instead
+
+nigeria_food_prices:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST', 'localhost') }}"
+      port: 5432
+      user: "{{ env_var('POSTGRES_USER', 'pipeline') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD', 'changeme') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'food_prices') }}"
+      schema: public
+      threads: 4

@@ -1,0 +1,36 @@
+{
+  "expectation_suite_name": "weather_data_suite",
+  "meta": {
+    "great_expectations_version": "1.8.1"
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {"min_value": 100, "max_value": 500000}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "market_name"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "weather_date"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "temperature_max", "min_value": 15, "max_value": 50}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "temperature_min", "min_value": 5, "max_value": 40}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "precipitation_mm", "min_value": 0, "max_value": 500}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "humidity_pct", "min_value": 0, "max_value": 100}
+    }
+  ]
+}

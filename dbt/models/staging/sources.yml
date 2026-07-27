@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: "Raw ingested data from external sources"
+    tables:
+      - name: wfp_prices
+        description: "WFP food prices from HDX (Nigeria markets)"
+      - name: worldbank_prices
+        description: "World Bank Real-Time Prices (monthly ML-estimated)"
+      - name: nbs_prices
+        description: "NBS Selected Food Prices Watch (PDF extraction)"
+      - name: cbn_rates
+        description: "CBN daily exchange rates (USD/NGN)"
+      - name: weather
+        description: "Open-Meteo weather data for market locations"

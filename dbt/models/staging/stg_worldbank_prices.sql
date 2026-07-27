@@ -1,16 +1,15 @@
--- Staging model for WFP food price data
+-- Staging model for World Bank Real-Time Prices
 -- Cleans, deduplicates, and standardizes
 
 with source as (
-    select * from {{ source('raw', 'wfp_prices') }}
+    select * from {{ source('raw', 'worldbank_prices') }}
 ),
 
 cleaned as (
     select
         market_name,
         commodity_name,
-        currency_name,
-        unit_name,
+        unit as unit_name,
         price as price_ngn,
         price_date,
         source,
@@ -29,7 +28,6 @@ cleaned as (
 select
     market_name,
     commodity_name,
-    currency_name,
     unit_name,
     price_ngn,
     price_date,

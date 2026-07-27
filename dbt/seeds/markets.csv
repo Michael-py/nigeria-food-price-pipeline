@@ -1,16 +1,79 @@
 market_id,market_name,state,geopolitical_zone,latitude,longitude
-1,Lagos (Mile 12),Lagos,South-West,6.5833,3.3833
-2,Kano (Dawanau),Kano,North-West,12.0022,8.5920
-3,Abuja (Wuse),FCT,North-Central,9.0579,7.4951
-4,Port Harcourt,Rivers,South-South,4.8156,7.0498
-5,Ibadan (Bodija),Oyo,South-West,7.4106,3.9055
-6,Kaduna,Kaduna,North-West,10.5105,7.4165
-7,Maiduguri,Borno,North-East,11.8311,13.1510
-8,Enugu,Enugu,South-East,6.4584,7.5464
-9,Jos,Plateau,North-Central,9.8965,8.8583
-10,Sokoto,Sokoto,North-West,13.0059,5.2476
-11,Benin City,Edo,South-South,6.3350,5.6037
-12,Abakaliki,Ebonyi,South-East,6.3249,8.1137
-13,Makurdi,Benue,North-Central,7.7338,8.5214
-14,Owerri,Imo,South-East,5.4836,7.0333
-15,Calabar,Cross River,South-South,4.9517,8.3220
+1,Aba,Abia,South-East,5.1167,7.3667
+2,Abba Gamaram,Borno,North-East,11.65,13.15
+3,Abuja,FCT,North-Central,9.0579,7.4951
+4,Bade (Gashua),Yobe,North-East,12.8711,11.0467
+5,Baga Road,Borno,North-East,11.85,13.10
+6,Bama,Borno,North-East,11.5219,13.6893
+7,Banki,Borno,North-East,11.0500,14.1500
+8,Bayantasha,Yobe,North-East,12.05,11.50
+9,Biriri,Yobe,North-East,11.90,11.30
+10,Biu,Borno,North-East,10.6114,12.1953
+11,Bolori Stores,Borno,North-East,11.83,13.15
+12,Budum,Yobe,North-East,12.50,11.70
+13,Bullunkutu,Borno,North-East,11.84,13.08
+14,Bursari,Yobe,North-East,12.52,11.25
+15,Custom,Borno,North-East,11.84,13.16
+16,Damagum,Yobe,North-East,11.89,11.71
+17,Damassack (CBM),Borno,North-East,12.05,13.10
+18,Damaturu,Yobe,North-East,11.7469,11.9608
+19,Damaturu (Sunday Market),Yobe,North-East,11.75,11.96
+20,Damboa,Borno,North-East,11.1531,12.7581
+21,Dandume,Katsina,North-West,11.4572,7.1261
+22,Dawanau,Kano,North-West,12.0022,8.5920
+23,Dikwa Central,Borno,North-East,12.0333,13.9167
+24,Gajiram,Borno,North-East,12.4667,13.2000
+25,Gamboru,Borno,North-East,12.3722,14.2078
+26,Geidam,Yobe,North-East,12.8939,11.9278
+27,Giwa,Kaduna,North-West,11.2797,7.3847
+28,Gombe,Gombe,North-East,10.2897,11.1711
+29,Gombi,Adamawa,North-East,10.1667,12.7333
+30,Gujba (Buni Yadi),Yobe,North-East,11.2689,12.0033
+31,Gujungu,Yobe,North-East,12.40,10.80
+32,Gulani (Tettaba),Yobe,North-East,11.4833,11.7667
+33,Gwandu,Kebbi,North-West,12.5069,4.6392
+34,Gwoza Central,Borno,North-East,11.0811,13.6947
+35,Ibadan,Oyo,South-West,7.3776,3.9470
+36,Illela (CBM),Sokoto,North-West,13.7317,5.2922
+37,Jakusko,Yobe,North-East,12.3167,11.1000
+38,Jibia (CBM),Katsina,North-West,13.0917,7.2250
+39,Jimeta Grain,Adamawa,North-East,9.2833,12.4667
+40,Kano,Kano,North-West,12.0022,8.5920
+41,Kashuwan Shanu,Kaduna,North-West,10.52,7.44
+42,Kaura Namoda,Zamfara,North-West,12.5928,6.5897
+43,Konduga,Borno,North-East,11.6567,13.3831
+44,Kusawam Shanu,Katsina,North-West,12.98,7.60
+45,Lagos,Lagos,South-West,6.4541,3.3947
+46,Machina Central,Yobe,North-East,12.9633,10.0550
+47,Madagali,Adamawa,North-East,10.8833,13.5333
+48,Mafa,Borno,North-East,11.8167,13.5167
+49,Magumeri Central,Borno,North-East,12.1167,12.8167
+50,Mai Adoua (CBM),Yobe,North-East,13.05,11.03
+51,Mai Gatari (CBM),Jigawa,North-West,12.8167,9.6000
+52,Maiduguri,Borno,North-East,11.8311,13.1510
+53,Michika,Adamawa,North-East,10.6167,13.3833
+54,Monday,Borno,North-East,11.82,13.15
+55,Monguno,Borno,North-East,12.6703,13.6106
+56,Mubi,Adamawa,North-East,10.2669,13.2671
+57,Mubi North,Adamawa,North-East,10.30,13.27
+58,Nangere,Yobe,North-East,11.7600,11.0850
+59,Ngala,Borno,North-East,12.3425,14.2000
+60,Ngalang,Yobe,North-East,11.90,11.50
+61,Ngelzarma,Yobe,North-East,12.40,11.50
+62,Nguru,Yobe,North-East,12.8794,10.4550
+63,Potiskum,Yobe,North-East,11.7119,11.0806
+64,Pulka,Borno,North-East,11.1500,13.6500
+65,Rann,Borno,North-East,12.3442,14.6833
+66,Saminaka,Kaduna,North-West,10.4167,8.6833
+67,Shani Main Market,Borno,North-East,10.2167,12.0667
+68,Tashan Bama,Borno,North-East,11.52,13.68
+69,Yunusari,Yobe,North-East,12.90,11.10
+70,Yusufari,Yobe,North-East,12.7250,10.7667
+71,North Central,North Central (Zone),North-Central,,
+72,North East,North East (Zone),North-East,,
+73,North West,North West (Zone),North-West,,
+74,South East,South East (Zone),South-East,,
+75,South South,South South (Zone),South-South,,
+76,South West,South West (Zone),South-West,,
+77,National,National,National,,
+78,Market Average,National,National,,

@@ -67,3 +67,16 @@ Thumbs.db
 # kiro generated files
 requirements.md
 tasks.md
+
+# Egg info
+*.egg-info/
+
+# dbt logs
+dbt/logs/
+
+# dbt lock file (auto-generated)
+dbt/package-lock.yml
+
+# docs 
+docs/
+observations.md

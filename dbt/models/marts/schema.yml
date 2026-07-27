@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: fct_daily_prices
+    description: "Daily food prices aggregated across sources"
+    columns:
+      - name: price_id
+        description: "Surrogate key"
+        tests:
+          - unique
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+      - name: market_name
+        tests:
+          - not_null
+      - name: commodity_name
+        tests:
+          - not_null
+      - name: price_ngn
+        tests:
+          - not_null
+
+  - name: fct_weekly_prices
+    description: "Weekly aggregated food prices"
+    columns:
+      - name: weekly_price_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_monthly_prices
+    description: "Monthly aggregated food prices"
+    columns:
+      - name: monthly_price_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_markets
+    description: "Market dimension with location metadata"
+    columns:
+      - name: market_name
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_commodities
+    description: "Commodity dimension with category metadata"
+    columns:
+      - name: commodity_name
+        tests:
+          - unique
+          - not_null

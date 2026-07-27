@@ -1,16 +1,22 @@
-FROM python:3.10-slim
+FROM python:3.9-slim-bookworm
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install dependencies
 COPY pyproject.toml .
-RUN pip install --no-cache-dir -e ".[api,ml]"
+RUN pip install --no-cache-dir \
+    fastapi uvicorn psycopg2-binary sqlalchemy pandas numpy \
+    xgboost scikit-learn mlflow pydantic python-dotenv requests
 
-COPY ml/ ml/
+# Copy source code
 COPY ingestion/ ingestion/
+COPY ml/ ml/
+COPY data/features/ data/features/
+COPY mlruns/ mlruns/
 
 EXPOSE 8000
 

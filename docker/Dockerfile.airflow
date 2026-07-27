@@ -1,18 +1,40 @@
-FROM apache/airflow:2.8.1-python3.10
+FROM apache/airflow:slim-2.10.5-python3.9
 
 USER root
+
+# System dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
+    build-essential libpq-dev git \
     && rm -rf /var/lib/apt/lists/*
 
 USER airflow
 
-COPY pyproject.toml /opt/airflow/
-RUN pip install --no-cache-dir -e "/opt/airflow[orchestration,quality]"
+# Python dependencies for the pipeline
+RUN pip install --no-cache-dir \
+    psycopg2-binary sqlalchemy pandas numpy requests \
+    pdfplumber beautifulsoup4 \
+    xgboost scikit-learn mlflow \
+    great-expectations \
+    dbt-postgres \
+    python-dotenv
 
-COPY airflow/dags /opt/airflow/dags
-COPY ingestion /opt/airflow/ingestion
-COPY ml /opt/airflow/ml
-COPY docker/airflow-entrypoint.sh /opt/airflow/entrypoint.sh
+# Copy pipeline source code
+COPY --chown=airflow:root ingestion/ /opt/airflow/ingestion/
+COPY --chown=airflow:root ml/ /opt/airflow/ml/
+COPY --chown=airflow:root dbt/ /opt/airflow/dbt/
+COPY --chown=airflow:root airflow/dags/ /opt/airflow/dags/
+COPY --chown=airflow:root data/features/ /opt/airflow/data/features/
+COPY --chown=airflow:root docker/airflow-entrypoint.sh /opt/airflow/entrypoint.sh
+
+# Ensure data directories exist
+RUN mkdir -p /opt/airflow/data/downloads/wfp \
+    /opt/airflow/data/downloads/worldbank \
+    /opt/airflow/data/downloads/nbs \
+    /opt/airflow/data/downloads/cbn \
+    /opt/airflow/data/downloads/weather \
+    /opt/airflow/data/features \
+    /opt/airflow/mlruns
+
+RUN chmod +x /opt/airflow/entrypoint.sh
 
 ENTRYPOINT ["/opt/airflow/entrypoint.sh"]
