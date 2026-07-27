@@ -161,7 +161,7 @@ class WeatherClient:
     ) -> pd.DataFrame:
         """Call Open-Meteo API (archive or forecast)."""
         url = f"{self.base_url}/{endpoint}"
-        params = {
+        params: dict[str, str | float] = {
             "latitude": lat,
             "longitude": lon,
             "start_date": start_date.isoformat(),
