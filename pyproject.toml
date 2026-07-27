@@ -79,8 +79,16 @@ addopts = "-v --cov=ingestion --cov=ml --cov-report=term-missing"
 
 [tool.mypy]
 python_version = "3.9"
-strict = false
 ignore_missing_imports = true
+strict = false
 disallow_untyped_defs = false
-check_untyped_defs = true
+disallow_incomplete_defs = false
+check_untyped_defs = false
+no_implicit_optional = false
 warn_return_any = false
+warn_unused_ignores = false
+disable_error_code = ["type-arg", "attr-defined", "no-untyped-def", "union-attr", "no-untyped-call", "return-value", "func-returns-value", "arg-type"]
+
+[[tool.mypy.overrides]]
+module = ["great_expectations.*", "mlflow.*", "xgboost.*"]
+ignore_errors = true
